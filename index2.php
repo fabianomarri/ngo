@@ -1,6 +1,48 @@
 <html>
 	<head>
 		<style>
+	body {font-family: Arial, Helvetica, sans-serif;}
+
+	/* The Modal (background) */
+	.modal {
+		display: none; /* Hidden by default */
+		position: fixed; /* Stay in place */
+		z-index: 1; /* Sit on top */
+		padding-top: 100px; /* Location of the box */
+		left: 0;
+		top: 0;
+		width: 100%; /* Full width */
+		height: 100%; /* Full height */
+		overflow: auto; /* Enable scroll if needed */
+		background-color: rgb(0,0,0); /* Fallback color */
+		background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+	}
+
+	/* Modal Content */
+	.modal-content {
+		background-color: #fefefe;
+		margin: auto;
+		padding: 20px;
+		border: 1px solid #888;
+		width: 80%;
+	}
+
+	/* The Close Button */
+	.close {
+		color: #aaaaaa;
+		float: right;
+		font-size: 28px;
+		font-weight: bold;
+	}
+
+	.close:hover,
+	.close:focus {
+		color: #000;
+		text-decoration: none;
+		cursor: pointer;
+	}
+		
+		
 			* {
 			  box-sizing: border-box;
 			}
@@ -72,54 +114,20 @@
 		
 	</head>
 	<body>
-<div id="floating-panel">
-      <input id="address" type="textbox" value="">
-      <input id="submit" type="button" value="Cari">
-    </div>
+
     <div id="map"></div>	
     <script>
-	function initMap() {
+	function initMap() 
+	{
         var titik_tengah = {lat: -6.125, lng: 106.822745};
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 12,
           center: titik_tengah
         });
 		
-		var geocoder = new google.maps.Geocoder();
-        document.getElementById('submit').addEventListener('click', function() {
-          geocodeAddress(geocoder, map);
-        });
+
 		
-		var contentString1 = "<?php echo='
-		if ($result->num_rows > 0) 
-			{
-				echo "<table id='myTable' align='center' margin-top='100'>
-				<tr>
-					<th>id</th>
-					<th>nama</th>
-				</tr>";
-				while($row = $result->fetch_assoc()) 
-				{
-							$lol= 
-							"no_hp:		".$row["no_hp"].
-							"&#013;region:		".$row["region"];
-					echo "
-						<tr>	
-							<td>
-								<a href=# title='$lol'>".$row["id"]."</a>
-							</td>
-							<td>".$row["nama"]."</td>							
-						</tr>
-					";	
-				}
-				echo "</table>";
-			} 
-			else 
-			{
-				echo "0 results";
-			}		
-		
-		";
+		var contentString1 = "";
         var infowindow1  = new google.maps.InfoWindow({
           content: contentString1
         });
@@ -153,20 +161,6 @@
 		
       }
 	  
-	  function geocodeAddress(geocoder, resultsMap) {
-        var address = document.getElementById('address').value;
-        geocoder.geocode({'address': address}, function(results, status) {
-          if (status === 'OK') {
-            resultsMap.setCenter(results[0].geometry.location);
-            var marker = new google.maps.Marker({
-              map: resultsMap,
-              position: results[0].geometry.location
-            });
-          } else {
-            alert('Geocode was not successful for the following reason: ' + status);
-          }
-        });
-      }  
 	</script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCVGfnOg8Vqh45iv5w5rZ8_vmVNvnAm7E&callback=initMap">
