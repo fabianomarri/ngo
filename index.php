@@ -90,36 +90,7 @@
           geocodeAddress(geocoder, map);
         });
 		
-		var contentString1 = "<?php echo='
-		if ($result->num_rows > 0) 
-			{
-				echo "<table id='myTable' align='center' margin-top='100'>
-				<tr>
-					<th>id</th>
-					<th>nama</th>
-				</tr>";
-				while($row = $result->fetch_assoc()) 
-				{
-							$lol= 
-							"no_hp:		".$row["no_hp"].
-							"&#013;region:		".$row["region"];
-					echo "
-						<tr>	
-							<td>
-								<a href=# title='$lol'>".$row["id"]."</a>
-							</td>
-							<td>".$row["nama"]."</td>							
-						</tr>
-					";	
-				}
-				echo "</table>";
-			} 
-			else 
-			{
-				echo "0 results";
-			}		
-		
-		";
+		var contentString1 = "lol";
         var infowindow1  = new google.maps.InfoWindow({
           content: contentString1
         });
@@ -177,7 +148,7 @@
 	$servername = "localhost";
 	$username = "root";
 	$password = "";
-	$dbname = "testo";
+	$dbname = "db_ngo";
 
 	$conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -185,7 +156,7 @@
 	{
 		die("Connection failed: " . $conn->connect_error);
 	} 			
-	$sql = "select * from persons, no_hp where no_hp.id=persons.id";
+	$sql = "select * from tbl_ormas";
 	$result = $conn->query($sql);
 	
 	if (!$result) 
@@ -197,20 +168,14 @@
 	{
 		echo "<table id='myTable' align='center' margin-top='100'>
 		<tr>
-			<th>id</th>
 			<th>nama</th>
 		</tr>";
 		while($row = $result->fetch_assoc()) 
 		{
-					$lol= 
-					"no_hp:		".$row["no_hp"].
-					"&#013;region:		".$row["region"];
+
 			echo "
 				<tr>	
-					<td>
-						<a href=# title='$lol'>".$row["id"]."</a>
-					</td>
-					<td>".$row["nama"]."</td>							
+					<td>".$row["nama_ormas"]."</td>							
 				</tr>
 			";	
 		}
